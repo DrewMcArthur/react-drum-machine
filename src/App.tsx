@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Tone from 'tone'
+import * as Tone from 'tone'
 import './App.css'
 
 import logo from './logo.svg'
