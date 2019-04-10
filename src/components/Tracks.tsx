@@ -14,16 +14,17 @@ class Tracks extends React.Component<ITracksProps>
     super(props)
   }
 
-  render ()
+  public render ()
   {
     // will be a larger thing that can be turned on/off and 
     // used as a dropdown to select a soundfile
     return (
       <div className='Tracks'>
-        {this.props.tracks.map((E: JSX.Element) =>
         {
-          <Track>{E}</Track>
-        })}
+          this.props.tracks.map((E: JSX.Element, index: number) =>
+          {
+            return <Track key={index}>{E}</Track>
+          })}
       </ div>
     )
   }

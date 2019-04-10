@@ -1,0 +1,12 @@
+.Tracks {
+  width: 20%;
+  float: left;
+}
+.Soundboard {
+  width: 80%;
+  float: left;
+}
+.track {
+  margin: 0;
+  border: 1px solid black;
+}

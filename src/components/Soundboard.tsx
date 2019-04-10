@@ -14,7 +14,7 @@ class Soundboard extends React.Component<ISoundboardProps>
     super(props)
   }
 
-  render ()
+  public render ()
   {
     return (
       <div className='Soundboard'>

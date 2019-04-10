@@ -1,0 +1,12 @@
+div.instrument {
+  border: 1px solid black;
+}
+
+div.instrument.active {
+  background-color: #121212;
+  color: white;
+}
+div.instrument.inactive {
+  background-color: white;
+  color: black;
+}

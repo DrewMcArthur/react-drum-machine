@@ -1,42 +1,79 @@
 import * as React from 'react'
 import * as Tone from 'tone'
-import './App.css'
 
-import logo from './logo.svg'
+import './css/App.css'
+import './css/main.css'
 
 // instruments
-import Kick from './sounds/Kick'
-import Snare from './sounds/Snare'
-import Hihats from './sounds/Hihats'
-import Lead from './sounds/Lead'
 import Chords from './sounds/Chords'
+import Hihats from './sounds/Hihats'
+import Kick from './sounds/Kick'
+import Lead from './sounds/Lead'
+import Snare from './sounds/Snare'
 
 // components
-import Tracks from './components/Tracks'
 import Soundboard from './components/Soundboard'
+import Tracks from './components/Tracks'
+import Instrument from './sounds/Instrument';
 
-class App extends React.Component
+interface IAppState
 {
-  synth = new Tone.PluckSynth().toMaster()
-  tracks: JSX.Element[] = [
-    <Kick synth={this.synth} />,
-    <Snare synth={this.synth} />,
-    <Hihats synth={this.synth} />,
-    <Lead synth={this.synth} />,
-    <Chords synth={this.synth} />,
-  ]
+  synth: any,
+  trackStates: boolean[],
+  tracks: JSX.Element[],
+}
+
+class App extends React.Component<{}, IAppState>
+{
+  constructor(props: {})
+  {
+    super(props)
+
+    this.state = {
+      synth: new Tone.PluckSynth().toMaster(),
+      trackStates: [ true, true, true, true, true ],
+      tracks: [ Kick, Snare, Hihats, Lead, Chords ].map(
+        (el: typeof Instrument, index: number) =>
+          React.createElement(el, { key: index, stateToggle: () => this.toggleTrackState(index) }))
+
+    }
+
+    this.toggleTrackState = this.toggleTrackState.bind(this)
+    this.getTrackState = this.getTrackState.bind(this)
+    this.setTrackState = this.setTrackState.bind(this)
+  }
+
+  public toggleTrackState (index: number)
+  {
+    const newState = !this.getTrackState(index)
+    this.setTrackState(index, newState)
+    return newState
+  }
+
+  public getTrackState (index: number)
+  {
+    return this.state.trackStates[ index ]
+  }
+
+  public setTrackState (index: number, state: boolean)
+  {
+    const states = this.state.trackStates
+    states[ index ] = state
+    this.setState({
+      trackStates: states
+    })
+  }
 
   public render ()
   {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to the Web Audio Interface!</h1>
         </header>
         <main>
-          <Tracks tracks={this.tracks} synth={this.synth} />
-          <Soundboard bars={4} beats={4} tracks={this.tracks} />
+          <Tracks tracks={this.state.tracks} synth={this.state.synth} />
+          <Soundboard bars={4} beats={4} tracks={this.state.tracks} />
         </main>
       </div>
     )

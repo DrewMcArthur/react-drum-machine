@@ -1,20 +1,47 @@
 import * as React from 'react'
 
+import '../css/instrument.css'
+
 interface IInstrumentProps
 {
   // a Tone.js synth object that can be used to trigger a sound
-  synth: any
+  key: number
+  stateToggle: () => boolean
 }
 
-class Instrument extends React.Component<any, IInstrumentProps>
+interface IInstrumentState
+{
+  isOn: boolean
+}
+
+class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
 {
   constructor(props: IInstrumentProps)
   {
     super(props)
+    this.state = {
+      "isOn": true
+    }
+    this.toggleState = this.toggleState.bind(this)
   }
-  render ()
+
+  public toggleState ()
   {
-    return <div className='emptyInstrument'></div>
+    const isOn = this.props.stateToggle()
+    this.setState({
+      "isOn": isOn
+    })
+
+  }
+
+  public render ()
+  {
+    return (<div className={'instrument ' + (this.state.isOn ? 'active' : 'inactive')}>
+      <p>{this.constructor.name}</p>
+      <div className='powerBtn'>
+        <button onClick={this.toggleState}>on/off</button>
+      </div>
+    </div >)
   }
 }
 
