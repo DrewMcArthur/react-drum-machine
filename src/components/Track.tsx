@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-class Track extends React.Component 
+class Track extends React.Component
 {
   public render ()
   {

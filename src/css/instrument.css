@@ -1,12 +1,26 @@
 div.instrument {
   border: 1px solid black;
+  height: 100%;
 }
 
-div.instrument.active {
-  background-color: #121212;
+/* two pieces of an instrument track */
+.instrumentControl {
+  width: 20%;
+  height: 100%;
+  float: left;
+}
+.Soundboard {
+  width: 80%;
+  height: 100%;
+  float: left;
+  background-color: white;
+}
+
+div.instrument.active .instrumentControl {
+  background-color: #222;
   color: white;
 }
-div.instrument.inactive {
+div.instrument.inactive .instrumentControl {
   background-color: white;
   color: black;
 }

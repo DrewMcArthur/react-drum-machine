@@ -14,7 +14,6 @@
     "moduleResolution": "node",
     "rootDir": "src",
     "forceConsistentCasingInFileNames": true,
-    "ordered-imports": false,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,

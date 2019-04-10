@@ -12,7 +12,6 @@ import Lead from './sounds/Lead'
 import Snare from './sounds/Snare'
 
 // components
-import Soundboard from './components/Soundboard'
 import Tracks from './components/Tracks'
 import Instrument from './sounds/Instrument';
 
@@ -73,7 +72,6 @@ class App extends React.Component<{}, IAppState>
         </header>
         <main>
           <Tracks tracks={this.state.tracks} synth={this.state.synth} />
-          <Soundboard bars={4} beats={4} tracks={this.state.tracks} />
         </main>
       </div>
     )

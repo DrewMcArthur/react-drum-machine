@@ -2,9 +2,7 @@ import * as React from 'react'
 
 interface ISoundboardProps
 {
-  bars: number
-  beats: number
-  tracks: JSX.Element[]
+  gridState: any
 }
 
 class Soundboard extends React.Component<ISoundboardProps>
