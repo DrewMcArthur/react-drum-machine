@@ -24,3 +24,20 @@ div.instrument.inactive .instrumentControl {
   background-color: white;
   color: black;
 }
+
+/* soundboard */
+.instrument .Soundboard .row {
+  height: 100%;
+}
+
+.instrument .Soundboard .row .beatDivision {
+  float: left;
+}
+.instrument .Soundboard .row .beatDivision.active {
+  background-color: #222;
+  color: white;
+}
+.instrument .Soundboard .row .beatDivision.active {
+  background-color: #FFF;
+  color: black;
+}
