@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as Tone from 'tone'
 
 import '../css/instrument.css'
 
@@ -17,6 +18,8 @@ interface IInstrumentState
   gridState: any[]
   isOn: boolean
 }
+
+const TIME_PER_16TH: number = new Tone.Time('16n').toMilliseconds()
 
 class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
 {
@@ -37,6 +40,22 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
       "isOn": isOn
     })
     return isOn
+  }
+
+  public isOn ()
+  {
+    return this.state.isOn
+  }
+
+  public static play ()
+  {
+    alert("Instrument play")
+  }
+
+  public playNote (time: Tone.Time)
+  {
+    const index: number = time.toMilliseconds() / TIME_PER_16TH
+    console.log("this is note " + index + ". (" + time.toMilliseconds() + " / " + TIME_PER_16TH + ")")
   }
 
   // given the grid for the soundboard, update this instrument's grid state

@@ -21,8 +21,10 @@ interface IAppState
 {
   synth: any,
   trackStates: boolean[],
+  trackNotes: boolean[][],
   tracks: JSX.Element[],
-  loopPlaying: boolean
+  // trackClasses: (typeof Instrument)[],
+  loopPlaying: boolean,
 }
 
 class App extends React.Component<{}, IAppState>
@@ -32,14 +34,21 @@ class App extends React.Component<{}, IAppState>
   {
     super(props)
 
-    const trackElements = [ Kick, Snare, Hihats, Lead, Chords ].map(
+    const trackInstruments = [ Kick, Snare, Hihats, Lead, Chords ]
+    const trackElements = trackInstruments.map(
       (el: typeof Instrument, index: number) =>
         React.createElement(el, { key: index, id: index, stateToggle: () => this.toggleTrackState(index) }))
+    const tracksRendered = trackElements.map((el: JSX.Element) =>
+    {
+      React.render(el)
+    })
 
     this.state = {
       synth: new Tone.PluckSynth().toMaster(),
       trackStates: [ true, true, true, true, true ],
+      // trackClasses: trackInstruments,
       tracks: trackElements,
+      trackNotes: [],
       loopPlaying: false
     }
 
@@ -47,7 +56,6 @@ class App extends React.Component<{}, IAppState>
     this.getTrackState = this.getTrackState.bind(this)
     this.setTrackState = this.setTrackState.bind(this)
 
-    this.loopPlayer = new LoopPlayer({ isPlaying: this.state.loopPlaying })
   }
 
   public toggleTrackState (index: number)
@@ -71,29 +79,9 @@ class App extends React.Component<{}, IAppState>
     })
   }
 
-  public updateTransportState ()
-  {
-    if (this.state.loopPlaying)
-    {
-      // Tone.Transport.play
-    }
-    else
-    {
-      // Tone.Transport.stop
-    }
-  }
-
   public togglePlayLoop ()
   {
-    this.setState((prevState) =>
-    {
-      return {
-        loopPlaying: !prevState.loopPlaying
-      }
-    })
-
-    // transport.play
-    this.updateTransportState()
+    this.setState((prevState) => { return { loopPlaying: !prevState.loopPlaying } })
   }
 
   public render ()
@@ -102,8 +90,15 @@ class App extends React.Component<{}, IAppState>
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Welcome to the Web Audio Interface!</h1>
-          <PlayButton isPlaying={this.state.loopPlaying} playFunc={() => this.togglePlayLoop()} />
-          {/* // TODO: LoopPlayer - takes in various states and handles playing / not playing pieces of music and loops */}
+          <PlayButton
+            isPlaying={this.state.loopPlaying}
+            playFunc={() => this.togglePlayLoop()} />
+          {this.loopPlayer}
+          <LoopPlayer
+            isPlaying={this.state.loopPlaying}
+            instruments={this.state.tracks}
+            grid={this.state.trackNotes} />
+
         </header>
         <main>
           <Tracks tracks={this.state.tracks} synth={this.state.synth} />
