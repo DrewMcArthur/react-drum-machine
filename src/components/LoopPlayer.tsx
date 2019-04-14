@@ -45,6 +45,8 @@ class LoopPlayer extends React.Component<ILoopPlayerProps, ILoopPlayerState>
     // loop through each instrument and loop through each beatdivision and play a note
     this.transport.scheduleRepeat((time: Tone.Time) =>
     {
+      console.log('in loop player transport loop time is ' + time)
+      console.log(this.noteMap.get(0, 0))
       for (let instrument of [ 0, 1, 2, 3, 4 ])
       {
         for (let beatdivision of [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ])
@@ -62,7 +64,7 @@ class LoopPlayer extends React.Component<ILoopPlayerProps, ILoopPlayerState>
         }
 
       }
-    }, '1m')
+    }, '1m').play()
     // Tone.context.resume()
 
     // this.loop = new Tone.Loop(() =>

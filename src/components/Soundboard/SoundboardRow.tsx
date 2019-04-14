@@ -16,6 +16,8 @@ interface ISoundboardState
   trackID: number
 }
 
+const BEATS_PER_BAR = 4
+
 class Soundboard extends React.Component<ISoundboardProps, ISoundboardState>
 {
   constructor(props: ISoundboardProps)
@@ -34,13 +36,23 @@ class Soundboard extends React.Component<ISoundboardProps, ISoundboardState>
 
   public generateRow (props: ISoundboardProps)
   {
-    return Array.from(Array(props.beatDivisions))
+    // flatten array of bars
+    return Array.from(Array(props.beatDivisions / BEATS_PER_BAR).keys())
+      .map((el: number, i: number) =>
+        <div className='bar'>{this.generateBar(props, i)}</div>)
+
+  }
+
+  public generateBar (props: ISoundboardProps, barIndex: number)
+  {
+    return Array.from(Array(BEATS_PER_BAR))
       .map((el: number, i: number) =>
         <SoundboardSpot
           height={props.height}
+          beatsPerBar={BEATS_PER_BAR}
           beatDivisions={props.beatDivisions}
           track={props.trackID}
-          id={i}
+          id={barIndex * 4 + i}
           key={i}
           notifyToggle={() => this.toggleDivision(i)}
           noteMap={props.noteMap}

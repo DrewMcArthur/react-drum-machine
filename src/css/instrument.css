@@ -32,6 +32,7 @@ div.instrument.inactive .instrumentControl {
 
 .instrument .Soundboard .row .beatDivision {
   float: left;
+  border: 1px solid gray;
 }
 .instrument .Soundboard .row .beatDivision.active {
   background-color: #222;
@@ -40,4 +41,11 @@ div.instrument.inactive .instrumentControl {
 .instrument .Soundboard .row .beatDivision.inactive {
   background-color: #FFF;
   color: black;
+}
+
+.instrument .Soundboard .row .bar {
+  height: 100%;
+  width: 24.55%;
+  border: 2px solid maroon;
+  float: left;
 }

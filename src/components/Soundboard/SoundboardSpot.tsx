@@ -9,6 +9,7 @@ interface ISoundboardSpotProps
   notifyToggle: () => void
   noteMap: any
   active: boolean
+  beatsPerBar: number
 }
 interface ISoundboardSpotState
 {
@@ -52,12 +53,13 @@ class SoundboardSpot extends React.Component<ISoundboardSpotProps, ISoundboardSp
         className={'beatDivision ' + (this.state && this.state.active
           ? 'active ' + this.props.id : 'inactive ' + this.props.id)}
         style={{
-          height: this.props.height + "%",
-          width: (100 / this.props.beatDivisions) + "%"
+          height: (this.props.height - 4) + "%",
+          width: (96.5 / this.props.beatsPerBar) + "%"
         }}
         key={this.props.id}
         onClick={this.toggle}
-      />
+      >
+      </div>
     )
   }
 }
