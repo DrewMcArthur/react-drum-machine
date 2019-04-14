@@ -8,6 +8,7 @@ interface ISoundboardSpotProps
   beatDivisions: number
   notifyToggle: () => void
   noteMap: any
+  active: boolean
 }
 interface ISoundboardSpotState
 {
@@ -23,7 +24,7 @@ class SoundboardSpot extends React.Component<ISoundboardSpotProps, ISoundboardSp
     super(props)
 
     this.state = {
-      active: false,
+      active: props.active,
       noteMap: props.noteMap,
       track: props.track,
       id: props.id

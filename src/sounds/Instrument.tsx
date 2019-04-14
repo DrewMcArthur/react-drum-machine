@@ -123,7 +123,7 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
           updateGrid={this.updateSoundboard}
           height={1}
           trackID={this.props.id}
-          beatDivisions={4}
+          beatDivisions={16}
           noteMap={this.state.noteMap}
         />
       </div >

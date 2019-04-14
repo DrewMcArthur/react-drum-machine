@@ -44,6 +44,7 @@ class Soundboard extends React.Component<ISoundboardProps, ISoundboardState>
           key={i}
           notifyToggle={() => this.toggleDivision(i)}
           noteMap={props.noteMap}
+          active={false}
         />
         // <div
         //   className={'beatDivision ' + (this.state && this.state.divisionStates[ i ] ? 'active ' + i : 'inactive ' + i)}
