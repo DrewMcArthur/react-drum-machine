@@ -11,26 +11,57 @@ interface IInstrumentProps
   // a Tone.js synth object that can be used to trigger a sound
   id: number
   stateToggle: () => boolean
+  isPlaying: boolean
+  loopPlaying: boolean
+  updateGrid: (grid: any) => void
+  noteMap: any
 }
 
 interface IInstrumentState
 {
   gridState: any[]
   isOn: boolean
+  trackPlayingIndex: number
+  loopPlaying: boolean
+  noteMap: any
 }
 
-const TIME_PER_16TH: number = new Tone.Time('16n').toMilliseconds()
+const TIME_PER_16TH: number = new Tone.Time('0:0:1').toMilliseconds()
 
 class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
 {
+  transport: Tone.Transport
   constructor(props: IInstrumentProps)
   {
     super(props)
+
     this.state = {
-      "gridState": [ false, false, false, false ],
-      "isOn": true
+      gridState: [ false, false, false, false ],
+      isOn: props.isPlaying,
+      trackPlayingIndex: 0,
+      loopPlaying: props.loopPlaying,
+      noteMap: props.noteMap
     }
+
+    this.transport = Tone.Transport
+    this.transport.stop()
+    this.transport.scheduleRepeat((time: number) =>
+    {
+      console.log("instrument transport loop")
+      if (this.shouldPlay())
+      {
+        this.playNote(time)
+      }
+    }, '1m')
+
     this.toggleState = this.toggleState.bind(this)
+  }
+
+  public componentWillReceiveProps (nextProps: IInstrumentProps)
+  {
+    this.setState({
+      isOn: nextProps.isPlaying
+    })
   }
 
   public toggleState ()
@@ -47,20 +78,24 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
     return this.state.isOn
   }
 
-  public static play ()
+  public shouldPlay ()
   {
-    alert("Instrument play")
+    return this.state.isOn && this.state.loopPlaying
   }
 
-  public playNote (time: Tone.Time)
+  public playNote (time: number)
   {
-    const index: number = time.toMilliseconds() / TIME_PER_16TH
-    console.log("this is note " + index + ". (" + time.toMilliseconds() + " / " + TIME_PER_16TH + ")")
+    const index: number = new Tone.Time(time).toMilliseconds() / TIME_PER_16TH
+    console.log("this is note " + index + ". (" + new Tone.Time(time).toMilliseconds() + " / " + TIME_PER_16TH + ")")
+    this.setState({
+      trackPlayingIndex: index
+    })
   }
 
   // given the grid for the soundboard, update this instrument's grid state
   public updateSoundboard (grid: any)
   {
+    this.props.updateGrid(grid)
     this.setState({
       gridState: grid
     })
@@ -68,8 +103,17 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
 
   public render ()
   {
+    if (this.state.isOn && this.state.loopPlaying && this.transport.state != "started")
+    {
+      this.transport.start()
+    }
+    else if (!this.state.isOn || !this.state.loopPlaying)
+    {
+      this.transport.stop()
+    }
     return (
-      <div className={'instrument ' + (this.state.isOn ? 'active' : 'inactive')}>
+      <div className={'instrument ' + this.props.id + ' ' + (this.state.isOn ? 'active' : 'inactive')}>
+        {/* {this.state.trackPlayingIndex} */}
         <TrackControl
           key={this.props.id}
           name={this.constructor.name}
@@ -78,7 +122,9 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
         <Soundboard
           updateGrid={this.updateSoundboard}
           height={1}
+          trackID={this.props.id}
           beatDivisions={4}
+          noteMap={this.state.noteMap}
         />
       </div >
     )

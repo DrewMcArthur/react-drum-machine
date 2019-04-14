@@ -37,7 +37,7 @@ div.instrument.inactive .instrumentControl {
   background-color: #222;
   color: white;
 }
-.instrument .Soundboard .row .beatDivision.active {
+.instrument .Soundboard .row .beatDivision.inactive {
   background-color: #FFF;
   color: black;
 }

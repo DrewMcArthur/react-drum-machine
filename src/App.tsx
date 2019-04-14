@@ -15,16 +15,18 @@ import Snare from './sounds/Snare'
 // components
 import LoopPlayer from './components/LoopPlayer';
 import PlayButton from './components/PlayButton'
-import Tracks from './components/Tracks'
+import Track from './components/Track';
+import NoteMap from './components/NoteMap';
 
 interface IAppState
 {
   synth: any,
   trackStates: boolean[],
   trackNotes: boolean[][],
-  tracks: JSX.Element[],
-  // trackClasses: (typeof Instrument)[],
+  // tracks: JSX.Element[],
+  trackClasses: (typeof Instrument)[],
   loopPlaying: boolean,
+  noteMap: any
 }
 
 class App extends React.Component<{}, IAppState>
@@ -35,22 +37,30 @@ class App extends React.Component<{}, IAppState>
     super(props)
 
     const trackInstruments = [ Kick, Snare, Hihats, Lead, Chords ]
-    const trackElements = trackInstruments.map(
-      (el: typeof Instrument, index: number) =>
-        React.createElement(el, { key: index, id: index, stateToggle: () => this.toggleTrackState(index) }))
-    const tracksRendered = trackElements.map((el: JSX.Element) =>
-    {
-      React.render(el)
-    })
+    // const trackElements = trackInstruments.map(
+    //   (el: typeof Instrument, index: number) =>
+    //     React.createElement(el,
+    //       {
+    //         key: index,
+    //         id: index,
+    //         stateToggle: () => this.toggleTrackState(index),
+    //         isPlaying: true,
+    //         loopPlaying: false,
+    //         updateGrid: (grid: any) => { this.updateGrid(index, grid) },
+    //         noteMap: null
+    //       }))
 
     this.state = {
       synth: new Tone.PluckSynth().toMaster(),
       trackStates: [ true, true, true, true, true ],
-      // trackClasses: trackInstruments,
-      tracks: trackElements,
+      trackClasses: trackInstruments,
+      // tracks: trackElements,
       trackNotes: [],
-      loopPlaying: false
+      loopPlaying: false,
+      noteMap: new NoteMap()
     }
+
+    console.log("App notemap says: " + this.state.noteMap.get(0, 0))
 
     this.toggleTrackState = this.toggleTrackState.bind(this)
     this.getTrackState = this.getTrackState.bind(this)
@@ -79,6 +89,15 @@ class App extends React.Component<{}, IAppState>
     })
   }
 
+  public updateGrid (index: number, grid: any)
+  {
+    const notes = this.state.trackNotes
+    notes[ index ] = grid
+    this.setState({
+      trackNotes: notes
+    })
+  }
+
   public togglePlayLoop ()
   {
     this.setState((prevState) => { return { loopPlaying: !prevState.loopPlaying } })
@@ -86,6 +105,18 @@ class App extends React.Component<{}, IAppState>
 
   public render ()
   {
+    const trackElements = this.state.trackClasses.map(
+      (el: typeof Instrument, index: number) =>
+        React.createElement(el,
+          {
+            key: index,
+            id: index,
+            stateToggle: () => this.toggleTrackState(index),
+            isPlaying: this.state.trackStates[ index ],
+            loopPlaying: this.state.loopPlaying,
+            updateGrid: (grid: any) => { this.updateGrid(index, grid) },
+            noteMap: this.state.noteMap
+          }))
     return (
       <div className="App">
         <header className="App-header">
@@ -96,12 +127,19 @@ class App extends React.Component<{}, IAppState>
           {this.loopPlayer}
           <LoopPlayer
             isPlaying={this.state.loopPlaying}
-            instruments={this.state.tracks}
+            instruments={trackElements}
+            noteMap={this.state.noteMap}
             grid={this.state.trackNotes} />
 
         </header>
         <main>
-          <Tracks tracks={this.state.tracks} synth={this.state.synth} />
+          <div className='Tracks'>
+            {
+              trackElements.map((E: JSX.Element, index: number) =>
+              {
+                return <Track key={index}>{E}</Track>
+              })}
+          </ div>
         </main>
       </div>
     )

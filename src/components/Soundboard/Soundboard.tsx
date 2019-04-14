@@ -12,10 +12,15 @@ interface ISoundboardProps
 
   // number of divisions within a bar (default = 4)
   beatDivisions: number
+
+  noteMap: any
+  trackID: number
 }
 interface ISoundboardState
 {
   grid: any
+  noteMap: any
+  trackID: number
 }
 
 class Soundboard extends React.Component<ISoundboardProps, ISoundboardState>
@@ -25,20 +30,24 @@ class Soundboard extends React.Component<ISoundboardProps, ISoundboardState>
     super(props)
 
     this.state = {
-      grid: this.generateBoard(props)
+      grid: this.generateBoard(props),
+      noteMap: props.noteMap,
+      trackID: props.trackID
     }
   }
 
   public generateBoard (props: ISoundboardProps)
   {
-
     return Array.from(Array(props.height).keys())
       .map((i: number) =>
         <SoundboardRow
           key={i}
+          trackID={props.trackID}
           height={100 / props.height}
-          beatDivisions={this.props.beatDivisions}
-        />)
+          beatDivisions={props.beatDivisions}
+          noteMap={props.noteMap}
+        />
+      )
   }
 
   public render ()
