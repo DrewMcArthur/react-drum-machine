@@ -113,7 +113,6 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
     }
     return (
       <div className={'instrument ' + this.props.id + ' ' + (this.state.isOn ? 'active' : 'inactive')}>
-        {/* {this.state.trackPlayingIndex} */}
         <TrackControl
           key={this.props.id}
           name={this.constructor.name}
