@@ -1,12 +1,27 @@
-import Instrument from './Instrument'
+import Instrument, { IInstrumentProps } from './Instrument'
+import * as Tone from 'tone';
 
 class HiHats extends Instrument
 {
-  public playHiHats ()
+  player: any
+  constructor(props: IInstrumentProps)
   {
-    // tone js stff to play a HiHats sound
-    // console.log("HiHats.playHiHats() executes");
-    alert("playHiHats good")
+    super(props)
+    this.player = new Tone.Player("/src/Samples/Drums/Hi-Hats/MB Hi Hat (2).wav", () =>
+    {
+      console.log('kick loaded in hihats class')
+    }).toMaster()
+  }
+
+  public playSound (time: number)
+  {
+    console.log('hihats playing sound at time: ' + time)
+    // tone js stff to play a kick sound
+    if (this.player.loaded)
+    {
+      console.log('hihats player loaded, starting player')
+      this.player.start(time)
+    }
   }
 }
 

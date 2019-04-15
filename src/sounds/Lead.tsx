@@ -1,12 +1,22 @@
-import Instrument from './Instrument'
+import Instrument, { IInstrumentProps } from './Instrument'
+import * as Tone from 'tone';
 
 class Lead extends Instrument
 {
-  public playLead ()
+  buffer: any
+  constructor(props: IInstrumentProps)
   {
-    // tone js stff to play a Lead sound
-    // console.log("Lead.playLead() executes");
-    alert("playLead good")
+    super(props)
+    this.buffer = new Tone.Player("../Samples/Drums/Kicks/MB Kick (2).wav").toMaster()
+  }
+
+  public playSound (time: number)
+  {
+    // tone js stff to play a kick sound
+    if (this.buffer.loaded)
+    {
+      this.buffer.start(time)
+    }
   }
 }
 
