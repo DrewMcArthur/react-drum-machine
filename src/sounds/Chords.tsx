@@ -8,7 +8,7 @@ class Chords extends Instrument
   {
     super(props)
     const soundFolder = [ "/Samples/Chords/" ]
-    const soundFiles = [ "viio.aif", "vi.aif", "V.aif", "IV.aif", "iii.aif", "ii.aiff", "I.aif" ]
+    const soundFiles = [ "viio.aif", "vi.aif", "V.aif", "IV.aif", "iii.aif", "ii.aif", "I.aif" ]
     this.buffers = []
     soundFiles.forEach((filename: string, i: number) =>
     {

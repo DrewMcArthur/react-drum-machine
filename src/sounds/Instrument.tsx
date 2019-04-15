@@ -10,8 +10,6 @@ export interface IInstrumentProps
 {
   // a Tone.js synth object that can be used to trigger a sound
   id: number
-  stateToggle: () => boolean
-  isPlaying: boolean
   loopPlaying: boolean
   updateGrid: (grid: any) => void
   noteMap: any
@@ -20,7 +18,6 @@ export interface IInstrumentProps
 interface IInstrumentState
 {
   gridState: any[]
-  isOn: boolean
   trackId: number
   loopPlaying: boolean
   noteMap: any
@@ -37,7 +34,6 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
 
     this.state = {
       gridState: [ false, false, false, false ],
-      isOn: props.isPlaying,
       trackId: props.id,
       loopPlaying: props.loopPlaying,
       noteMap: props.noteMap
@@ -45,12 +41,11 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
 
     this.transport = Tone.Transport
     this.loopId = this.state.trackId
-    this.toggleState = this.toggleState.bind(this)
   }
 
   updateLoop = () =>
   {
-    const { noteMap, trackId, isOn } = this.state
+    const { noteMap, trackId } = this.state
     if (!noteMap) { return; }
     this.transport.clear(this.loopId);
     console.log("updating instrument loop")
@@ -62,7 +57,7 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
       {
         soundStates.forEach((state: number, stateIndex) => 
         {
-          if (state == 1 && isOn)
+          if (state == 1)
           {
             console.log('playing note: ' + stateIndex + ': ' + state)
             this.playSound(soundIndex, time + stateIndex * new Tone.Time('16n').toSeconds())
@@ -81,29 +76,9 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
   public componentWillReceiveProps (nextProps: IInstrumentProps)
   {
     this.setState({
-      isOn: nextProps.isPlaying,
       loopPlaying: nextProps.loopPlaying
     })
     this.updateLoop()
-  }
-
-  public toggleState ()
-  {
-    const isOn = this.props.stateToggle()
-    this.setState({
-      "isOn": isOn
-    })
-    return isOn
-  }
-
-  public isOn ()
-  {
-    return this.state.isOn
-  }
-
-  public shouldPlay ()
-  {
-    return this.state.isOn && this.state.loopPlaying
   }
 
   // given the grid for the soundboard, update this instrument's grid state
@@ -118,11 +93,10 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
   public render ()
   {
     return (
-      <div className={'instrument ' + this.props.id + ' ' + (this.state.isOn ? 'active' : 'inactive')}>
+      <div className={'instrument active ' + this.props.id}>
         <TrackControl
           key={this.props.id}
           name={this.constructor.name}
-          stateToggle={this.toggleState}
         />
         <Soundboard
           updateGrid={this.updateSoundboard}

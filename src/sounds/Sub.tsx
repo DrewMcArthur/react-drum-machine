@@ -1,20 +1,16 @@
-import Instrument, { IInstrumentProps } from './Instrument'
-import * as Tone from 'tone';
+import Instrument from './Instrument'
+import { IInstrumentProps } from './Instrument'
+import * as Tone from 'tone'
 
-class HiHats extends Instrument
+class Sub extends Instrument
 {
-
-  buffers: Tone.Player[]
+  buffers: any
   constructor(props: IInstrumentProps)
   {
     super(props)
-    const soundFolder = [ "/Samples/Drums/" ]
-    const soundFiles = [
-      "Hi-Hats/MB Hi Hat (2).wav",
-      "Hi-Hats/MB Hi Hat (2).wav",
-      "Open Hats/MB Open Hat (5).wav",
-      "Open Hats/MB Open Hat (6).wav"
-    ]
+    const soundFolder = [ "/Samples/Drums/808s/" ]
+    const soundFiles = [ "MB Kick (2).wav", "MB Kick (7).wav",
+      "MB Kick (9).wav", "MB Kick (10).wav" ]
     this.buffers = []
     soundFiles.forEach((filename: string, i: number) =>
     {
@@ -33,5 +29,5 @@ class HiHats extends Instrument
     }
   }
 }
-export default HiHats
 
+export default Sub
