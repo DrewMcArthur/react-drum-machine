@@ -7,7 +7,7 @@ class Chords extends Instrument
   constructor(props: IInstrumentProps)
   {
     super(props)
-    this.buffer = new Tone.Player("../Samples/Drums/Kicks/MB Kick (2).wav").toMaster()
+    this.buffer = new Tone.Player("../Samples/Chords/V.aif").toMaster()
   }
 
   public playSound (time: number)

@@ -8,7 +8,7 @@ class Kick extends Instrument
   constructor(props: IInstrumentProps)
   {
     super(props)
-    this.buffer = new Tone.Player("../Samples/Drums/Kicks/MB Kick (2).wav").toMaster()
+    this.buffer = new Tone.Player("/Samples/Drums/Kicks/MB Kick (2).wav").toMaster()
   }
 
   public playSound (time: number)

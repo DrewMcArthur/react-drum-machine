@@ -7,10 +7,7 @@ class HiHats extends Instrument
   constructor(props: IInstrumentProps)
   {
     super(props)
-    this.player = new Tone.Player("/src/Samples/Drums/Hi-Hats/MB Hi Hat (2).wav", () =>
-    {
-      console.log('kick loaded in hihats class')
-    }).toMaster()
+    this.player = new Tone.Player("/Samples/Drums/Hi-Hats/MB Hi Hat (2).wav").toMaster()
   }
 
   public playSound (time: number)

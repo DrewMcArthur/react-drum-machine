@@ -6,17 +6,17 @@ import './css/main.css'
 
 // instruments
 import Instrument from './sounds/Instrument'
+import Kick from './sounds/Kick'
 import Chords from './sounds/Chords'
 import Hihats from './sounds/Hihats'
-import Kick from './sounds/Kick'
 import Lead from './sounds/Lead'
 import Snare from './sounds/Snare'
 
 // components
-import LoopPlayer from './components/LoopPlayer';
 import PlayButton from './components/PlayButton'
 import Track from './components/Track';
 import NoteMap from './components/NoteMap';
+import LoopPlayer from './components/LoopPlayer';
 
 interface IAppState
 {
@@ -27,11 +27,12 @@ interface IAppState
   trackClasses: (typeof Instrument)[],
   loopPlaying: boolean,
   noteMap: any
+  buffersLoaded: boolean
 }
 
 class App extends React.Component<{}, IAppState>
 {
-  loopPlayer: any;
+  // loopPlayer: any;
   constructor(props: {})
   {
     super(props)
@@ -57,15 +58,22 @@ class App extends React.Component<{}, IAppState>
       // tracks: trackElements,
       trackNotes: [],
       loopPlaying: false,
-      noteMap: new NoteMap()
+      noteMap: new NoteMap(),
+      buffersLoaded: false
     }
+
+    Tone.Buffer.on('load', () =>
+    {
+      this.setState({
+        buffersLoaded: true
+      })
+    })
 
     console.log("App notemap says: " + this.state.noteMap.get(0, 0))
 
     this.toggleTrackState = this.toggleTrackState.bind(this)
     this.getTrackState = this.getTrackState.bind(this)
     this.setTrackState = this.setTrackState.bind(this)
-
   }
 
   public toggleTrackState (index: number)
@@ -121,10 +129,12 @@ class App extends React.Component<{}, IAppState>
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Welcome to the Web Audio Interface!</h1>
-          <PlayButton
-            isPlaying={this.state.loopPlaying}
-            playFunc={() => this.togglePlayLoop()} />
-          {this.loopPlayer}
+          {this.state.buffersLoaded ?
+            <PlayButton
+              isPlaying={this.state.loopPlaying}
+              playFunc={() => this.togglePlayLoop()} />
+            : <p className='playBtnLoading'>Loading...</p>}
+          {/* {this.loopPlayer} */}
           <LoopPlayer
             isPlaying={this.state.loopPlaying}
             instruments={trackElements}
