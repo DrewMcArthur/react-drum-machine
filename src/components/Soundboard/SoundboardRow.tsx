@@ -3,7 +3,6 @@ import SoundboardSpot from './SoundboardSpot';
 
 interface ISoundboardProps
 {
-  key: number
   beatDivisions: number
   height: number
   noteMap: any
@@ -39,7 +38,7 @@ class Soundboard extends React.Component<ISoundboardProps, ISoundboardState>
     // flatten array of bars
     return Array.from(Array(props.beatDivisions / BEATS_PER_BAR).keys())
       .map((el: number, i: number) =>
-        <div className='bar'>{this.generateBar(props, i)}</div>)
+        <div key={i} className='bar'>{this.generateBar(props, i)}</div>)
 
   }
 
@@ -96,7 +95,7 @@ class Soundboard extends React.Component<ISoundboardProps, ISoundboardState>
   public render ()
   {
     return (
-      <div className='row' key={this.props.key}>
+      <div className='row' key={this.props.trackID}>
         {this.state.row}
       </div>
     )

@@ -6,7 +6,7 @@ import '../css/instrument.css'
 import Soundboard from 'src/components/Soundboard/Soundboard';
 import TrackControl from 'src/components/TrackControl';
 
-interface IInstrumentProps
+export interface IInstrumentProps
 {
   // a Tone.js synth object that can be used to trigger a sound
   id: number
@@ -21,16 +21,16 @@ interface IInstrumentState
 {
   gridState: any[]
   isOn: boolean
-  trackPlayingIndex: number
+  trackId: number
   loopPlaying: boolean
   noteMap: any
 }
 
-const TIME_PER_16TH: number = new Tone.Time('0:0:1').toMilliseconds()
-
 class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
 {
   transport: Tone.Transport
+  loopId: number
+  sound: any
   constructor(props: IInstrumentProps)
   {
     super(props)
@@ -38,30 +38,50 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
     this.state = {
       gridState: [ false, false, false, false ],
       isOn: props.isPlaying,
-      trackPlayingIndex: 0,
+      trackId: props.id,
       loopPlaying: props.loopPlaying,
       noteMap: props.noteMap
     }
 
     this.transport = Tone.Transport
-    this.transport.stop()
-    this.transport.scheduleRepeat((time: number) =>
-    {
-      console.log("instrument transport loop")
-      if (this.shouldPlay())
-      {
-        this.playNote(time)
-      }
-    }, '1m')
-
+    this.loopId = this.state.trackId
     this.toggleState = this.toggleState.bind(this)
+  }
+
+  updateLoop = () =>
+  {
+    const { noteMap, trackId, isOn } = this.state
+    if (!noteMap) { return; }
+    this.transport.clear(this.loopId);
+    console.log("updating instrument loop")
+
+    const loop = (time: number) =>
+    {
+      console.log("instrument looping" + trackId)
+      noteMap.getTrack(trackId).forEach((s: number, i: number) =>
+      {
+        if (s == 1 && isOn)
+        {
+          console.log('playing note: ' + i + ': ' + s)
+          this.playSound(time + i * new Tone.Time('16n').toSeconds())
+        }
+      })
+    }
+    this.loopId = this.transport.scheduleRepeat(loop, "1m")
+  }
+
+  public playSound (time: number)
+  {
+    throw new Error("implement playsound")
   }
 
   public componentWillReceiveProps (nextProps: IInstrumentProps)
   {
     this.setState({
-      isOn: nextProps.isPlaying
+      isOn: nextProps.isPlaying,
+      loopPlaying: nextProps.loopPlaying
     })
+    this.updateLoop()
   }
 
   public toggleState ()
@@ -83,15 +103,6 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
     return this.state.isOn && this.state.loopPlaying
   }
 
-  public playNote (time: number)
-  {
-    const index: number = new Tone.Time(time).toMilliseconds() / TIME_PER_16TH
-    console.log("this is note " + index + ". (" + new Tone.Time(time).toMilliseconds() + " / " + TIME_PER_16TH + ")")
-    this.setState({
-      trackPlayingIndex: index
-    })
-  }
-
   // given the grid for the soundboard, update this instrument's grid state
   public updateSoundboard (grid: any)
   {
@@ -103,14 +114,6 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
 
   public render ()
   {
-    if (this.state.isOn && this.state.loopPlaying && this.transport.state != "started")
-    {
-      this.transport.start()
-    }
-    else if (!this.state.isOn || !this.state.loopPlaying)
-    {
-      this.transport.stop()
-    }
     return (
       <div className={'instrument ' + this.props.id + ' ' + (this.state.isOn ? 'active' : 'inactive')}>
         <TrackControl

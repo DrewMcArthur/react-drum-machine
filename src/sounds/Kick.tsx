@@ -1,12 +1,23 @@
 import Instrument from './Instrument'
+import { IInstrumentProps } from './Instrument'
+import * as Tone from 'tone'
 
 class Kick extends Instrument
 {
-  public static play ()
+  buffer: any
+  constructor(props: IInstrumentProps)
+  {
+    super(props)
+    this.buffer = new Tone.Player("../Samples/Drums/Kicks/MB Kick (2).wav").toMaster()
+  }
+
+  public playSound (time: number)
   {
     // tone js stff to play a kick sound
-    // console.log("Kick.playKick() executes");
-    alert("playkick good")
+    if (this.buffer.loaded)
+    {
+      this.buffer.start(time)
+    }
   }
 }
 

@@ -29,6 +29,11 @@ export default class NoteMap
     return this._noteMap[ track ][ beat ] ? true : false
   }
 
+  public getTrack (track: number)
+  {
+    return this._noteMap[ track ]
+  }
+
   public set (track: number, beat: number, setting: boolean) 
   {
     this._noteMap[ track ][ beat ] = setting ? 1 : 0

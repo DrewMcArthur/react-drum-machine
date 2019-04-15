@@ -64,7 +64,7 @@ class LoopPlayer extends React.Component<ILoopPlayerProps, ILoopPlayerState>
         }
 
       }
-    }, '1m').play()
+    }, '1m')
     // Tone.context.resume()
 
     // this.loop = new Tone.Loop(() =>
