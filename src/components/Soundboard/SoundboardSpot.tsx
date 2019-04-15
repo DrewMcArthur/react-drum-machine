@@ -4,6 +4,7 @@ interface ISoundboardSpotProps
 {
   track: number
   id: number
+  soundId: number
   height: number
   beatDivisions: number
   notifyToggle: () => void
@@ -16,6 +17,7 @@ interface ISoundboardSpotState
   active: boolean
   noteMap: any
   track: number
+  soundId: number
   id: number
 }
 class SoundboardSpot extends React.Component<ISoundboardSpotProps, ISoundboardSpotState>
@@ -28,7 +30,8 @@ class SoundboardSpot extends React.Component<ISoundboardSpotProps, ISoundboardSp
       active: props.active,
       noteMap: props.noteMap,
       track: props.track,
-      id: props.id
+      id: props.id,
+      soundId: props.soundId
     }
 
     this.toggle = this.toggle.bind(this)
@@ -36,7 +39,7 @@ class SoundboardSpot extends React.Component<ISoundboardSpotProps, ISoundboardSp
 
   public toggle ()
   {
-    const setting = this.state.noteMap.toggle(this.state.track, this.state.id)
+    const setting = this.state.noteMap.toggle(this.state.track, this.state.soundId, this.state.id)
     console.log('newsetting: ' + setting)
     this.setState((prevState: ISoundboardSpotState) =>
     {
@@ -53,7 +56,7 @@ class SoundboardSpot extends React.Component<ISoundboardSpotProps, ISoundboardSp
         className={'beatDivision ' + (this.state && this.state.active
           ? 'active ' + this.props.id : 'inactive ' + this.props.id)}
         style={{
-          height: (this.props.height - 4) + "%",
+          height: "100%",
           width: (96.5 / this.props.beatsPerBar) + "%"
         }}
         key={this.props.id}

@@ -3,19 +3,27 @@ import * as Tone from 'tone';
 
 class Chords extends Instrument
 {
-  buffer: any
+  buffers: Tone.Player[]
   constructor(props: IInstrumentProps)
   {
     super(props)
-    this.buffer = new Tone.Player("../Samples/Chords/V.aif").toMaster()
+    const soundFolder = [ "/Samples/Chords/" ]
+    const soundFiles = [ "viio.aif", "vi.aif", "V.aif", "IV.aif", "iii.aif", "ii.aiff", "I.aif" ]
+    this.buffers = []
+    soundFiles.forEach((filename: string, i: number) =>
+    {
+      this.buffers.push(
+        new Tone.Player(soundFolder + filename).toMaster()
+      )
+    })
   }
 
-  public playSound (time: number)
+  public playSound (sound: number, time: number)
   {
     // tone js stff to play a kick sound
-    if (this.buffer.loaded)
+    if (this.buffers[ sound ].loaded)
     {
-      this.buffer.start(time)
+      this.buffers[ sound ].start(time)
     }
   }
 }

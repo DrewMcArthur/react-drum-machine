@@ -58,19 +58,22 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
     const loop = (time: number) =>
     {
       console.log("instrument looping" + trackId)
-      noteMap.getTrack(trackId).forEach((s: number, i: number) =>
+      noteMap.getTrack(trackId).forEach((soundStates: number[], soundIndex: number) =>
       {
-        if (s == 1 && isOn)
+        soundStates.forEach((state: number, stateIndex) => 
         {
-          console.log('playing note: ' + i + ': ' + s)
-          this.playSound(time + i * new Tone.Time('16n').toSeconds())
-        }
+          if (state == 1 && isOn)
+          {
+            console.log('playing note: ' + stateIndex + ': ' + state)
+            this.playSound(soundIndex, time + stateIndex * new Tone.Time('16n').toSeconds())
+          }
+        })
       })
     }
     this.loopId = this.transport.scheduleRepeat(loop, "1m")
   }
 
-  public playSound (time: number)
+  public playSound (sound: number, time: number)
   {
     throw new Error("implement playsound")
   }
@@ -123,7 +126,7 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
         />
         <Soundboard
           updateGrid={this.updateSoundboard}
-          height={1}
+          height={this.state.noteMap.getTrack(this.props.id).length}
           trackID={this.props.id}
           beatDivisions={16}
           noteMap={this.state.noteMap}

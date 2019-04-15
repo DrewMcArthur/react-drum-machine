@@ -4,19 +4,28 @@ import * as Tone from 'tone'
 
 class Kick extends Instrument
 {
-  buffer: any
+  buffers: any
   constructor(props: IInstrumentProps)
   {
     super(props)
-    this.buffer = new Tone.Player("/Samples/Drums/Kicks/MB Kick (2).wav").toMaster()
+    const soundFolder = [ "/Samples/Drums/Kicks/" ]
+    const soundFiles = [ "MB Kick (2).wav", "MB Kick (4).wav",
+      "MB Kick (14).wav", "MB Kick (15).wav" ]
+    this.buffers = []
+    soundFiles.forEach((filename: string, i: number) =>
+    {
+      this.buffers.push(
+        new Tone.Player(soundFolder + filename).toMaster()
+      )
+    })
   }
 
-  public playSound (time: number)
+  public playSound (sound: number, time: number)
   {
     // tone js stff to play a kick sound
-    if (this.buffer.loaded)
+    if (this.buffers[ sound ].loaded)
     {
-      this.buffer.start(time)
+      this.buffers[ sound ].start(time)
     }
   }
 }

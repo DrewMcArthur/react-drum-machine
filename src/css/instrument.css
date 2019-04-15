@@ -46,6 +46,7 @@ div.instrument.inactive .instrumentControl {
 .instrument .Soundboard .row .bar {
   height: 100%;
   width: 24.55%;
-  border: 2px solid maroon;
+  border: solid maroon;
+  border-width: 0px 2px;
   float: left;
 }

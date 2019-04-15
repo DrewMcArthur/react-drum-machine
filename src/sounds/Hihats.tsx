@@ -10,7 +10,7 @@ class HiHats extends Instrument
     this.player = new Tone.Player("/Samples/Drums/Hi-Hats/MB Hi Hat (2).wav").toMaster()
   }
 
-  public playSound (time: number)
+  public playSound (sound: number, time: number)
   {
     console.log('hihats playing sound at time: ' + time)
     // tone js stff to play a kick sound

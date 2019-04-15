@@ -1,22 +1,33 @@
 import Instrument, { IInstrumentProps } from './Instrument'
-// import * as Tone from 'tone';
+import * as Tone from 'tone';
 
 class Lead extends Instrument
 {
-  buffer: any
+  notes: string[]
+  synths: any[]
   constructor(props: IInstrumentProps)
   {
     super(props)
-    // needs synth
-    // this.buffer = new Tone.Player("../Samples/Drums/Kicks/MB Kick (2).wav").toMaster()
+    this.synths = [
+      new Tone.PluckSynth().toMaster(),
+      new Tone.PluckSynth().toMaster(),
+      new Tone.PluckSynth().toMaster(),
+      new Tone.PluckSynth().toMaster(),
+      new Tone.PluckSynth().toMaster(),
+      new Tone.PluckSynth().toMaster(),
+      new Tone.PluckSynth().toMaster(),
+      new Tone.PluckSynth().toMaster()
+    ]
+    this.notes = [ "C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5" ].reverse()
   }
 
-  public playSound (time: number)
+  public playSound (sound: number, time: number)
   {
     // tone js stff to play a kick sound
-    if (this.buffer && this.buffer.loaded)
+    if (this.synths[ sound ])
     {
-      this.buffer.start(time)
+      console.log('synth playing sound: ' + this.notes[ sound ])
+      this.synths[ sound ].triggerAttackRelease(this.notes[ sound ], '16n', time)
     }
   }
 }

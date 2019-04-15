@@ -20,7 +20,6 @@ import LoopPlayer from './components/LoopPlayer';
 
 interface IAppState
 {
-  synth: any,
   trackStates: boolean[],
   trackNotes: boolean[][],
   // tracks: JSX.Element[],
@@ -37,7 +36,7 @@ class App extends React.Component<{}, IAppState>
   {
     super(props)
 
-    const trackInstruments = [ Kick, Snare, Hihats, Lead, Chords ]
+    const trackInstruments = [ Kick, Snare, Hihats, Lead, Chords, Kick, Kick ]
     // const trackElements = trackInstruments.map(
     //   (el: typeof Instrument, index: number) =>
     //     React.createElement(el,
@@ -52,7 +51,6 @@ class App extends React.Component<{}, IAppState>
     //       }))
 
     this.state = {
-      synth: new Tone.PluckSynth().toMaster(),
       trackStates: [ true, true, true, true, true ],
       trackClasses: trackInstruments,
       // tracks: trackElements,

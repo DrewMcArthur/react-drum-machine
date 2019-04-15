@@ -7,12 +7,15 @@ interface ISoundboardProps
   height: number
   noteMap: any
   trackID: number
+  soundID: number
+  sounds: number
 }
 interface ISoundboardState
 {
   noteMap: any
   row: JSX.Element[]
   trackID: number
+  soundID: number
 }
 
 const BEATS_PER_BAR = 4
@@ -29,7 +32,8 @@ class Soundboard extends React.Component<ISoundboardProps, ISoundboardState>
     this.state = {
       noteMap: props.noteMap,
       row: this.generateRow(props),
-      trackID: props.trackID
+      trackID: props.trackID,
+      soundID: props.soundID
     }
   }
 
@@ -51,6 +55,7 @@ class Soundboard extends React.Component<ISoundboardProps, ISoundboardState>
           beatsPerBar={BEATS_PER_BAR}
           beatDivisions={props.beatDivisions}
           track={props.trackID}
+          soundId={props.soundID}
           id={barIndex * 4 + i}
           key={i}
           notifyToggle={() => this.toggleDivision(i)}
@@ -95,7 +100,7 @@ class Soundboard extends React.Component<ISoundboardProps, ISoundboardState>
   public render ()
   {
     return (
-      <div className='row' key={this.props.trackID}>
+      <div className='row' style={{ height: (100 / this.props.sounds) + '%' }} key={this.props.trackID}>
         {this.state.row}
       </div>
     )

@@ -42,6 +42,8 @@ class Soundboard extends React.Component<ISoundboardProps, ISoundboardState>
       .map((i: number) =>
         <SoundboardRow
           key={i}
+          soundID={i}
+          sounds={props.height}
           trackID={props.trackID}
           height={100 / props.height}
           beatDivisions={props.beatDivisions}

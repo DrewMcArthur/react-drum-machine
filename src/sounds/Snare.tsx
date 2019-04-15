@@ -3,18 +3,34 @@ import * as Tone from 'tone'
 
 class Snare extends Instrument
 {
-  buffer: any
+  buffers: any
   constructor(props: IInstrumentProps)
   {
     super(props)
-    this.buffer = new Tone.Player("../Samples/Drums/Snares/MB Snare (2).wav").toMaster()
+
+    const soundFolder = [ "/Samples/Drums/" ]
+    const soundFiles = [
+      "/Claps/MB Clap (3).wav",
+      "/Claps/MB Clap (7).wav",
+      "/Snares/MB Snare (2).wav",
+      "/Snares/MB Snare (15).wav"
+    ]
+
+    this.buffers = []
+    soundFiles.forEach((filename: string, i: number) =>
+    {
+      this.buffers.push(
+        new Tone.Player(soundFolder + filename).toMaster()
+      )
+    })
+
   }
-  public playSound (time: number)
+  public playSound (sound: number, time: number)
   {
     // tone js stff to play a Snare sound
-    if (this.buffer.loaded)
+    if (this.buffers[ sound ].loaded)
     {
-      this.buffer.start(time)
+      this.buffers[ sound ].start(time)
     }
   }
 }
