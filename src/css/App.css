@@ -8,14 +8,14 @@
 }
 
 .App-header {
-  background-color: #0080FF;
+  background-color: #222;
   padding: 3%;
   max-height: 20%;
   color: white;
   z-index: 0;
 }
 main {
-  background:color #F1C40F;
+  background:color #222;
   overflow-y: scroll
 }
 
