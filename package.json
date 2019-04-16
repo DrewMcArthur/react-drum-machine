@@ -2,8 +2,10 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/DrewMcArthur/react-drum-machine",
   "dependencies": {
     "@types/jquery": "^3.3.29",
+    "gh-pages": "^2.0.1",
     "jquery": "^3.4.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -14,7 +16,9 @@
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
