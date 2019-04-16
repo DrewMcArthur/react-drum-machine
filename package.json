@@ -25,7 +25,7 @@
     "@types/node": "^11.13.2",
     "@types/react": "^16.8.13",
     "@types/react-dom": "^16.8.3",
-    "@types/tone": "https://github.com/Tonejs/TypeScript.git",
+    "@types/tone": "git+https://github.com/Tonejs/TypeScript.git",
     "typescript": "^3.4.2"
   }
 }
