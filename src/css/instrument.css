@@ -1,5 +1,5 @@
 div.instrument {
-  border: 1px solid black;
+  border: 1px solid #0080FF;
   height: 100%;
 }
 
@@ -22,7 +22,7 @@ div.instrument.active .instrumentControl {
 }
 div.instrument.inactive .instrumentControl {
   background-color: white;
-  color: black;
+  color: #0080FF;
 }
 
 /* soundboard */
@@ -35,7 +35,7 @@ div.instrument.inactive .instrumentControl {
   border: 1px solid gray;
 }
 .instrument .Soundboard .row .beatDivision.active {
-  background-color: #222;
+  background-color: #0080FF;
   color: white;
 }
 .instrument .Soundboard .row .beatDivision.inactive {
@@ -46,7 +46,6 @@ div.instrument.inactive .instrumentControl {
 .instrument .Soundboard .row .bar {
   height: 100%;
   width: 24.55%;
-  border: solid maroon;
-  border-width: 0px 2px;
+  border: 2px solid black;
   float: left;
 }
