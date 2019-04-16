@@ -12,6 +12,9 @@ import Hihats from './sounds/Hihats'
 import Lead from './sounds/Lead'
 import Snare from './sounds/Snare'
 import Clap from './sounds/Clap'
+import OpenHats from './sounds/OpenHats'
+import Crash from './sounds/Crash'
+import Percs from './sounds/Percs'
 
 // components
 import PlayButton from './components/PlayButton'
@@ -37,8 +40,8 @@ class App extends React.Component<{}, IAppState>
   {
     super(props)
 
-    const trackNames = [ "Sub", "Kick", "Snare", "Clap", "Hihats", "Lead", "Chords" ]
-    const trackInstruments = [ Sub, Kick, Snare, Clap, Hihats, Lead, Chords ]
+    const trackNames = [ "Lead", "Chords", "Sub", "Kick", "Snare", "Clap", "Hihats", "OpenHats", "Crashes", "Percs" ]
+    const trackInstruments = [ Lead, Chords, Sub, Kick, Snare, Clap, Hihats, OpenHats, Crash, Percs ]
 
     this.state = {
       trackNames: trackNames,

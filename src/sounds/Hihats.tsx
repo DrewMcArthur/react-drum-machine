@@ -8,12 +8,12 @@ class HiHats extends Instrument
   constructor(props: IInstrumentProps)
   {
     super(props)
-    const soundFolder = [ "/Samples/Drums/" ]
+    const soundFolder = [ "/Samples/Drums/Hi-Hats/" ]
     const soundFiles = [
-      "Hi-Hats/MB Hi Hat (2).wav",
-      "Hi-Hats/MB Hi Hat (2).wav",
-      "Open Hats/MB Open Hat (5).wav",
-      "Open Hats/MB Open Hat (6).wav"
+      "MB Hi Hat (2).wav",
+      "MB Hi Hat (5).wav",
+      "MB Hi Hat (7).wav",
+      "MB Hi Hat (8).wav",
     ]
     this.buffers = []
     soundFiles.forEach((filename: string, i: number) =>
