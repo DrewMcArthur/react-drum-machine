@@ -57,7 +57,7 @@ class SoundboardSpot extends React.Component<ISoundboardSpotProps, ISoundboardSp
           ? 'active ' + this.props.id : 'inactive ' + this.props.id)}
         style={{
           height: "100%",
-          width: (96.5 / this.props.beatsPerBar) + "%"
+          width: (96.6 / this.props.beatsPerBar) + "%"
         }}
         key={this.props.id}
         onClick={this.toggle}

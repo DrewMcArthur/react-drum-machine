@@ -94,7 +94,7 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
   public render ()
   {
     return (
-      <div className={'instrument active ' + this.props.id}>
+      <div className={'instrument active n' + this.props.id}>
         <TrackControl
           key={this.props.id}
           myName={this.props.myName}

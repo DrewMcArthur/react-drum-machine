@@ -100,7 +100,7 @@ class Soundboard extends React.Component<ISoundboardProps, ISoundboardState>
   public render ()
   {
     return (
-      <div className='row' style={{ height: (100 / this.props.sounds) + '%' }} key={this.props.trackID}>
+      <div className='row' style={{ height: (101 / this.props.sounds) + '%' }} key={this.props.trackID}>
         {this.state.row}
       </div>
     )

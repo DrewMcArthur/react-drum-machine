@@ -22,6 +22,7 @@ main {
 .App-title {
   font-size: 2.3em;
   font-family: serif;
+  display: inline;
 }
 
 .App-intro {

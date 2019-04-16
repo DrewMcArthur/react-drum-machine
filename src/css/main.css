@@ -6,7 +6,7 @@ main {
   width: 100%;
 }
 .Tracks {
-  width: 100%;
+  width: 98.75%;
   height: 100%;
   float: left;
   color: #FFF
@@ -14,6 +14,7 @@ main {
 .track {
   margin: 0;
   height: 20%;
+  width: 100%;
   border: solid #FFF;
   border-width: 3px 1px
 }
