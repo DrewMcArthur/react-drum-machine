@@ -13,7 +13,7 @@ class HiHats extends Instrument
       "MB Hi Hat (2).wav",
       "MB Hi Hat (5).wav",
       "MB Hi Hat (7).wav",
-      "MB Hi Hat (8).wav",
+      "MB Hi Hat (9).wav",
     ]
     this.buffers = []
     soundFiles.forEach((filename: string, i: number) =>
