@@ -6,7 +6,7 @@ interface ITrackControlProps
 {
   // a Tone.js synth object that can be used to trigger a sound
   key: number
-  name: string
+  myName: string
 }
 
 class TrackControl extends React.Component<ITrackControlProps, {}>
@@ -20,7 +20,7 @@ class TrackControl extends React.Component<ITrackControlProps, {}>
   {
     return (
       <div className='instrumentControl'>
-        <p>{this.props.name}</p>
+        <p>{this.props.myName}</p>
       </div >)
   }
 }

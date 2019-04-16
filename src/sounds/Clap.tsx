@@ -1,15 +1,21 @@
-import Instrument from './Instrument'
-import { IInstrumentProps } from './Instrument'
+import Instrument, { IInstrumentProps } from './Instrument'
 import * as Tone from 'tone'
 
-class Sub extends Instrument
+class Snare extends Instrument
 {
   buffers: any
   constructor(props: IInstrumentProps)
   {
     super(props)
-    const soundFolder = [ "/Samples/Drums/808s/" ]
-    const soundFiles = [ "MB 808 (2).wav", "MB 808 (7).wav", "MB 808 (9).wav", "MB 808 (10).wav" ]
+
+    const soundFolder = [ "/Samples/Drums/" ]
+    const soundFiles = [
+      "/Claps/MB Clap (3).wav",
+      "/Claps/MB Clap (7).wav",
+      "/Snares/MB Snare (2).wav",
+      "/Snares/MB Snare (15).wav"
+    ]
+
     this.buffers = []
     soundFiles.forEach((filename: string, i: number) =>
     {
@@ -17,11 +23,11 @@ class Sub extends Instrument
         new Tone.Player(soundFolder + filename).toMaster()
       )
     })
-  }
 
+  }
   public playSound (sound: number, time: number)
   {
-    // tone js stff to play a kick sound
+    // tone js stff to play a Snare sound
     if (this.buffers[ sound ].loaded)
     {
       this.buffers[ sound ].start(time)
@@ -29,4 +35,5 @@ class Sub extends Instrument
   }
 }
 
-export default Sub
+export default Snare
+
