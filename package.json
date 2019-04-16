@@ -2,7 +2,7 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/DrewMcArthur/react-drum-machine",
+  "homepage": "https://mcarthur.in/react-drum-machine",
   "dependencies": {
     "@types/jquery": "^3.3.29",
     "gh-pages": "^2.0.1",
