@@ -13,6 +13,7 @@ export interface IInstrumentProps
   loopPlaying: boolean
   updateGrid: (grid: any) => void
   noteMap: any
+  myName: string
 }
 
 interface IInstrumentState
@@ -96,7 +97,7 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
       <div className={'instrument active ' + this.props.id}>
         <TrackControl
           key={this.props.id}
-          name={this.constructor.name}
+          myName={this.props.myName}
         />
         <Soundboard
           updateGrid={this.updateSoundboard}

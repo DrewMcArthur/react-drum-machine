@@ -8,12 +8,12 @@ class Snare extends Instrument
   {
     super(props)
 
-    const soundFolder = [ "/Samples/Drums/" ]
+    const soundFolder = [ "/Samples/Drums/Snares/" ]
     const soundFiles = [
-      "/Claps/MB Clap (3).wav",
-      "/Claps/MB Clap (7).wav",
-      "/Snares/MB Snare (2).wav",
-      "/Snares/MB Snare (15).wav"
+      "MB Snare (1).wav",
+      "MB Snare (2).wav",
+      "MB Snare (11).wav",
+      "MB Snare (15).wav"
     ]
 
     this.buffers = []

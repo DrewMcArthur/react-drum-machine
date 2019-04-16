@@ -11,6 +11,10 @@ import Chords from './sounds/Chords'
 import Hihats from './sounds/Hihats'
 import Lead from './sounds/Lead'
 import Snare from './sounds/Snare'
+import Clap from './sounds/Clap'
+import OpenHats from './sounds/OpenHats'
+import Crash from './sounds/Crash'
+import Percs from './sounds/Percs'
 
 // components
 import PlayButton from './components/PlayButton'
@@ -21,8 +25,8 @@ import Sub from './sounds/Sub';
 
 interface IAppState
 {
+  trackNames: string[],
   trackNotes: boolean[][],
-  // tracks: JSX.Element[],
   trackClasses: (typeof Instrument)[],
   loopPlaying: boolean,
   noteMap: any
@@ -36,21 +40,11 @@ class App extends React.Component<{}, IAppState>
   {
     super(props)
 
-    const trackInstruments = [ Sub, Kick, Snare, Hihats, Lead, Chords ]
-    // const trackElements = trackInstruments.map(
-    //   (el: typeof Instrument, index: number) =>
-    //     React.createElement(el,
-    //       {
-    //         key: index,
-    //         id: index,
-    //         stateToggle: () => this.toggleTrackState(index),
-    //         isPlaying: true,
-    //         loopPlaying: false,
-    //         updateGrid: (grid: any) => { this.updateGrid(index, grid) },
-    //         noteMap: null
-    //       }))
+    const trackNames = [ "Lead", "Chords", "Sub", "Kick", "Snare", "Clap", "Hihats", "OpenHats", "Crashes", "Percs" ]
+    const trackInstruments = [ Lead, Chords, Sub, Kick, Snare, Clap, Hihats, OpenHats, Crash, Percs ]
 
     this.state = {
+      trackNames: trackNames,
       trackClasses: trackInstruments,
       // tracks: trackElements,
       trackNotes: [],
@@ -92,6 +86,7 @@ class App extends React.Component<{}, IAppState>
           {
             key: index,
             id: index,
+            myName: this.state.trackNames[ index ],
             loopPlaying: this.state.loopPlaying,
             updateGrid: (grid: any) => { this.updateGrid(index, grid) },
             noteMap: this.state.noteMap

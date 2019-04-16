@@ -9,8 +9,7 @@ class Sub extends Instrument
   {
     super(props)
     const soundFolder = [ "/Samples/Drums/808s/" ]
-    const soundFiles = [ "MB Kick (2).wav", "MB Kick (7).wav",
-      "MB Kick (9).wav", "MB Kick (10).wav" ]
+    const soundFiles = [ "MB 808 (2).wav", "MB 808 (7).wav", "MB 808 (9).wav", "MB 808 (10).wav" ]
     this.buffers = []
     soundFiles.forEach((filename: string, i: number) =>
     {

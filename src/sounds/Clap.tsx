@@ -1,20 +1,21 @@
 import Instrument, { IInstrumentProps } from './Instrument'
-import * as Tone from 'tone';
+import * as Tone from 'tone'
 
-class HiHats extends Instrument
+class Clap extends Instrument
 {
-
-  buffers: Tone.Player[]
+  buffers: any
   constructor(props: IInstrumentProps)
   {
     super(props)
-    const soundFolder = [ "/Samples/Drums/Hi-Hats/" ]
+
+    const soundFolder = [ "/Samples/Drums/Claps/" ]
     const soundFiles = [
-      "MB Hi Hat (2).wav",
-      "MB Hi Hat (5).wav",
-      "MB Hi Hat (7).wav",
-      "MB Hi Hat (8).wav",
+      "MB Clap (3).wav",
+      "MB Clap (2).wav",
+      "MB Clap (4).wav",
+      "MB Clap (7).wav"
     ]
+
     this.buffers = []
     soundFiles.forEach((filename: string, i: number) =>
     {
@@ -22,16 +23,17 @@ class HiHats extends Instrument
         new Tone.Player(soundFolder + filename).toMaster()
       )
     })
-  }
 
+  }
   public playSound (sound: number, time: number)
   {
-    // tone js stff to play a kick sound
+    // tone js stff to play a Snare sound
     if (this.buffers[ sound ].loaded)
     {
       this.buffers[ sound ].start(time)
     }
   }
 }
-export default HiHats
+
+export default Clap
 
