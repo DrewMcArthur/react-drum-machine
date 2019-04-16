@@ -6,11 +6,13 @@
   "dependencies": {
     "@types/jquery": "^3.3.29",
     "gh-pages": "^2.0.1",
+    "is-extendable": "^1.0.1",
     "jquery": "^3.4.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts-ts": "3.1.0",
-    "tone": "^13.4.9"
+    "react-scripts-ts": "^4.0.8",
+    "tone": "^13.4.9",
+    "webpack-manifest-plugin": "^2.0.4"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -27,5 +29,11 @@
     "@types/react-dom": "^16.8.3",
     "@types/tone": "git+https://github.com/Tonejs/TypeScript.git",
     "typescript": "^3.4.2"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

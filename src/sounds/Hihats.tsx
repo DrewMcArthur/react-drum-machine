@@ -8,7 +8,7 @@ class HiHats extends Instrument
   constructor(props: IInstrumentProps)
   {
     super(props)
-    const soundFolder = [ "/Samples/Drums/Hi-Hats/" ]
+    const soundFolder = [ "/react-drum-machine/Samples/Drums/Hi-Hats/" ]
     const soundFiles = [
       "MB Hi Hat (2).wav",
       "MB Hi Hat (5).wav",

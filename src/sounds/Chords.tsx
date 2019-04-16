@@ -7,7 +7,7 @@ class Chords extends Instrument
   constructor(props: IInstrumentProps)
   {
     super(props)
-    const soundFolder = [ "/Samples/Chords/" ]
+    const soundFolder = [ "/react-drum-machine/Samples/Chords/" ]
     const soundFiles = [ "viio.aif", "vi.aif", "V.aif", "IV.aif", "iii.aif", "ii.aif", "I.aif" ]
     this.buffers = []
     soundFiles.forEach((filename: string, i: number) =>

@@ -8,7 +8,7 @@ class Percs extends Instrument
   constructor(props: IInstrumentProps)
   {
     super(props)
-    const soundFolder = [ "/Samples/Drums/Extras/" ]
+    const soundFolder = [ "/react-drum-machine/Samples/Drums/Extras/" ]
     const soundFiles = [
       "MB Church Bell.wav",
       "MB Lumi Hit.wav",
