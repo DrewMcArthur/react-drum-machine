@@ -8,7 +8,7 @@ class HiHats extends Instrument
   constructor(props: IInstrumentProps)
   {
     super(props)
-    const soundFolder = [ "/react-drum-machine/Samples/Drums/Hi-Hats/" ]
+    const soundFolder = [ "/Hi-Hats/" ]
     const soundFiles = [
       "MB Hi Hat (2).wav",
       "MB Hi Hat (5).wav",
@@ -19,7 +19,7 @@ class HiHats extends Instrument
     soundFiles.forEach((filename: string, i: number) =>
     {
       this.buffers.push(
-        new Tone.Player(soundFolder + filename).toMaster()
+        new Tone.Player(this.baseURL + soundFolder + filename).toMaster()
       )
     })
   }

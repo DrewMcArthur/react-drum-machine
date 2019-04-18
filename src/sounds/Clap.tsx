@@ -8,7 +8,7 @@ class Clap extends Instrument
   {
     super(props)
 
-    const soundFolder = [ "/Samples/Drums/Claps/" ]
+    const soundFolder = [ "/Claps/" ]
     const soundFiles = [
       "MB Clap (3).wav",
       "MB Clap (2).wav",
@@ -20,7 +20,7 @@ class Clap extends Instrument
     soundFiles.forEach((filename: string, i: number) =>
     {
       this.buffers.push(
-        new Tone.Player(soundFolder + filename).toMaster()
+        new Tone.Player(this.baseURL + soundFolder + filename).toMaster()
       )
     })
 

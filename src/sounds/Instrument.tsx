@@ -29,6 +29,7 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
   transport: Tone.Transport
   loopId: number
   sound: any
+  baseURL: string
   constructor(props: IInstrumentProps)
   {
     super(props)
@@ -42,6 +43,7 @@ class Instrument extends React.Component<IInstrumentProps, IInstrumentState>
 
     this.transport = Tone.Transport
     this.loopId = this.state.trackId
+    this.baseURL = "/react-drum-machine/Samples/Drums"
   }
 
   updateLoop = () =>

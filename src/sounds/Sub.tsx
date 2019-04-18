@@ -8,13 +8,13 @@ class Sub extends Instrument
   constructor(props: IInstrumentProps)
   {
     super(props)
-    const soundFolder = [ "/Samples/Drums/808s/" ]
+    const soundFolder = [ "/808s/" ]
     const soundFiles = [ "MB 808 (2).wav", "MB 808 (7).wav", "MB 808 (9).wav", "MB 808 (10).wav" ]
     this.buffers = []
     soundFiles.forEach((filename: string, i: number) =>
     {
       this.buffers.push(
-        new Tone.Player(soundFolder + filename).toMaster()
+        new Tone.Player(this.baseURL + soundFolder + filename).toMaster()
       )
     })
   }

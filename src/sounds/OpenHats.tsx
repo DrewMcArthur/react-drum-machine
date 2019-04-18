@@ -8,7 +8,7 @@ class OpenHats extends Instrument
   constructor(props: IInstrumentProps)
   {
     super(props)
-    const soundFolder = [ "/Samples/Drums/Open Hats/" ]
+    const soundFolder = [ "/Open Hats/" ]
     const soundFiles = [
       "MB Open Hat (3).wav",
       "MB Open Hat (5).wav",
@@ -19,7 +19,7 @@ class OpenHats extends Instrument
     soundFiles.forEach((filename: string, i: number) =>
     {
       this.buffers.push(
-        new Tone.Player(soundFolder + filename).toMaster()
+        new Tone.Player(this.baseURL + soundFolder + filename).toMaster()
       )
     })
   }

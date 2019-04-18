@@ -8,14 +8,14 @@ class Kick extends Instrument
   constructor(props: IInstrumentProps)
   {
     super(props)
-    const soundFolder = [ "/Samples/Drums/Kicks/" ]
+    const soundFolder = [ "/Kicks/" ]
     const soundFiles = [ "MB Kick (2).wav", "MB Kick (4).wav",
       "MB Kick (14).wav", "MB Kick (15).wav" ]
     this.buffers = []
     soundFiles.forEach((filename: string, i: number) =>
     {
       this.buffers.push(
-        new Tone.Player(soundFolder + filename).toMaster()
+        new Tone.Player(this.baseURL + soundFolder + filename).toMaster()
       )
     })
   }

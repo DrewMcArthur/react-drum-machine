@@ -8,7 +8,7 @@ class Snare extends Instrument
   {
     super(props)
 
-    const soundFolder = [ "/Samples/Drums/Snares/" ]
+    const soundFolder = [ "/Snares/" ]
     const soundFiles = [
       "MB Snare (1).wav",
       "MB Snare (2).wav",
@@ -20,7 +20,7 @@ class Snare extends Instrument
     soundFiles.forEach((filename: string, i: number) =>
     {
       this.buffers.push(
-        new Tone.Player(soundFolder + filename).toMaster()
+        new Tone.Player(this.baseURL + soundFolder + filename).toMaster()
       )
     })
 

@@ -8,7 +8,7 @@ class Crash extends Instrument
   {
     super(props)
 
-    const soundFolder = [ "/Samples/Drums/Crashes/" ]
+    const soundFolder = [ "/Crashes/" ]
     const soundFiles = [
       "MB Crash (3).wav",
       "MB Crash (2).wav",
@@ -20,7 +20,7 @@ class Crash extends Instrument
     soundFiles.forEach((filename: string, i: number) =>
     {
       this.buffers.push(
-        new Tone.Player(soundFolder + filename).toMaster()
+        new Tone.Player(this.baseURL + soundFolder + filename).toMaster()
       )
     })
 
