@@ -15,7 +15,7 @@ importScripts("/react-drum-machine/workbox-v3.6.3/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "/react-drum-machine/workbox-v3.6.3"});
 
 importScripts(
-  "/react-drum-machine/precache-manifest.f3fa5b63a4a1d4cbd12e7ad642a3cddc.js"
+  "/react-drum-machine/precache-manifest.0637b07535b49af98d62727ad9d05de6.js"
 );
 
 workbox.clientsClaim();
